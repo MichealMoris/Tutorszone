@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\SetLocale;
 use App\Models\Contact;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -23,6 +24,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Route::fallback(function () {
 //     return redirect('/');
 // });
+Route::get('/en/client-ip', function (Request $request) {
+    $clientIp = $request->ip();
+    return response()->json(['ip' => $clientIp]);
+});
 Route::get('/en/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";

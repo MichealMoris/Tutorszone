@@ -71,9 +71,10 @@ class HomeController extends Controller
         try {
             $uaeIP = "94.200.100.101";
             $saIP = "212.26.1.150";
-            $locationInfo = $this->getLocationInfo(request()->ip());
+            $locationInfo = $this->getLocationInfo("197.39.40.182");
             error_log('Country is: '.$locationInfo);
-            return strtolower($locationInfo['data']['country']);
+            // return strtolower($locationInfo['data']['country']);
+            return "Hello";
         } catch (\Throwable $th) {
             return "ae";
         }
@@ -82,7 +83,7 @@ class HomeController extends Controller
 
     public function HomePage()
     {
-
+        error_log('Country is: ');
         $country = $this->getUserCountry();
         if ($country == 'sa') {
             $contacts = Contact::where('country', 'sa')->get();
