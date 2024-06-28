@@ -23,7 +23,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Route::fallback(function () {
 //     return redirect('/');
 // });
-Route::get('/linkstorage', function () {
+Route::get('/en/linkstorage', function () {
     Artisan::call('storage:link');
 });
 Route::group(['prefix' => '{locale}'], function () {
