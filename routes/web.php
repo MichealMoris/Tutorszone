@@ -8,6 +8,7 @@ use App\Http\Middleware\SetLocale;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -25,9 +26,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return redirect('/');
 // });
 Route::get('/en/client-ip', function (Request $request) {
-
     $headers = $request->headers->all();
-    return response()->json(['ip' => $headers["x-real-ip"],]);
+    $ip = $headers["x-real-ip"][0];
+    return Http::get("http://ipinfo.io/$ip/json");
 
 });
 Route::get('/en/create-symlink', function (){
