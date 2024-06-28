@@ -12,6 +12,25 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
+    public function getVpnIpAddress(Request $request)
+    {
+        // Check if the X-Forwarded-For header exists
+        if ($request->hasHeader('X-Forwarded-For')) {
+            $forwardedFor = $request->header('X-Forwarded-For');
+
+            // Split the string by commas
+            $ipAddresses = explode(',', $forwardedFor);
+
+            // Trim whitespace and check if there are at least two IPs
+            if (count($ipAddresses) > 1) {
+                return trim($ipAddresses[1]); // Return the second IP address
+            }
+        }
+
+        // Fallback to using the standard IP method if X-Forwarded-For is not present or doesn't have enough IPs
+        return $request->ip();
+    }
+
     // public function getMyIPAddress()
     // {
     //     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -50,7 +69,7 @@ class HomeController extends Controller
     public function getUserCountry()
     {
 
-        error_log('IP Address: '. request()->ip());
+        error_log('IP Address: ' . request()->ip());
 
         try {
             $uaeIP = "94.200.100.101";
@@ -63,8 +82,9 @@ class HomeController extends Controller
     }
 
 
-    public function HomePage()
+    public function HomePage(Request $request)
     {
+        error_log($this->getVpnIpAddress($request));
         $country = $this->getUserCountry();
         if ($country == 'sa') {
             $contacts = Contact::where('country', 'sa')->get();
@@ -94,7 +114,8 @@ class HomeController extends Controller
         }
     }
 
-    public function data(){
+    public function data()
+    {
         $country = $this->getUserCountry();
         if ($country == 'sa') {
             $enTeachers = EnTeacher::whereIn('teacher_country', ['sa', 'both'])->get();
@@ -117,5 +138,4 @@ class HomeController extends Controller
             return response()->json($data);
         }
     }
-
 }
