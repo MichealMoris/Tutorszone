@@ -84,7 +84,7 @@ class HomeController extends Controller
 
     public function HomePage(Request $request)
     {
-        error_log("IP Address #2:".$request->ips());
+        //error_log("IP Address #2:".$request->ips());
         $country = $this->getUserCountry();
         if ($country == 'sa') {
             $contacts = Contact::where('country', 'sa')->get();
