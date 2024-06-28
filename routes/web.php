@@ -28,8 +28,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/en/client-ip', function (Request $request) {
     $headers = $request->headers->all();
     $ip = $headers["x-real-ip"][0];
-    $data = (array) Http::get("http://ipinfo.io/$ip/json");
-    return $data;
+    $data = Http::get("http://ipinfo.io/$ip/json");
+    return $data["country"];
 
 });
 Route::get('/en/create-symlink', function (){
