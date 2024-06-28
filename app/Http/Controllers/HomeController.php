@@ -7,21 +7,24 @@ use App\Models\Contact;
 use App\Models\EnTeacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
 
-    public function getMyIPAddress()
-    {
-        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'] ?? '';
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
-        } else {
-            $ip = $_SERVER['REMOTE_ADDR'] ?? '';
-        }
-        return $ip;
-    }
+    // public function getMyIPAddress()
+    // {
+    //     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    //         $ip = $_SERVER['HTTP_CLIENT_IP'] ?? '';
+    //     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    //         $ip = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
+    //     } else {
+    //         $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+    //     }
+
+    //     // error_log('IP Address: '.request()->ip());
+    //     // return $ip;
+    // }
 
     public function getLocationInfo($ip)
     {
@@ -46,11 +49,13 @@ class HomeController extends Controller
 
     public function getUserCountry()
     {
+
+        error_log('IP Address: '. request()->ip());
+
         try {
-            $visitorIP = $this->getMyIPAddress();
             $uaeIP = "94.200.100.101";
             $saIP = "212.26.1.150";
-            $locationInfo = $this->getLocationInfo($visitorIP);
+            $locationInfo = $this->getLocationInfo(request()->ip());
             return strtolower($locationInfo['data']['country']);
         } catch (\Throwable $th) {
             return "ae";
