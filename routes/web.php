@@ -29,7 +29,7 @@ Route::get('/en/client-ip', function (Request $request) {
     $headers = $request->headers->all();
     $ip = $headers["x-real-ip"][0];
     $data = (array) Http::get("http://ipinfo.io/$ip/json");
-    return $data["country"];
+    return $data;
 
 });
 Route::get('/en/create-symlink', function (){
