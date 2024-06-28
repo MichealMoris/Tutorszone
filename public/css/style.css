@@ -1,0 +1,166 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins.ttf') format("truetype");
+}
+
+
+body {
+    background: #F2F2F2;
+    padding: 0.5rem;
+}
+
+* {
+    font-family: 'Poppins';
+    color: color(srgb 0.2237 0.2154 0.2279);
+}
+
+.action-btn {
+    border-radius: 16px !important;
+    background-color: #fe5658 !important;
+    border-color: #fe5658 !important;
+    color: white !important;
+}
+
+.about-btn {
+    border-radius: 13px !important;
+    background-color: #fd8a56 !important;
+    border-color: #fd8a56 !important;
+}
+
+.custom-card {
+    border-radius: 15px;
+    height: 100% !important;
+    color: #252525;
+}
+
+.custom-card .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.custom-card .card-title {
+    font-weight: bold;
+}
+
+.custom-card .card-text {
+    font-size: 0.8rem;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.divider {
+    width: -webkit-fill-available;
+    height: 1px;
+    background: lightgray;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: black !important;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutDown {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+.modal.fade .modal-dialog {
+    transform: translateY(100%);
+    transition: transform 0.5s ease-out;
+}
+
+.modal.show .modal-dialog {
+    animation: slideInUp 0.5s forwards;
+}
+
+.modal.hide .modal-dialog {
+    animation: slideOutDown 0.5s forwards;
+}
+
+.content-column,
+.img-column {
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.animate-slide-from-left {
+    animation: slide-from-left 1s ease forwards;
+}
+
+.animate-slide-from-right {
+    animation: slide-from-right 1s ease forwards;
+}
+
+@keyframes slide-from-left {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-from-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Dashboard Styling */
+.login-html {
+    height: 100%;
+}
+
+.login-body {
+    height: 100%;
+    background: #F2F2F2;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.preview-img {
+    max-width: 150px;
+    margin-bottom: 10px;
+}
+
+
