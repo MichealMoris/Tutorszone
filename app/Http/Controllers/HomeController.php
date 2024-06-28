@@ -84,8 +84,13 @@ class HomeController extends Controller
 
     public function HomePage(Request $request)
     {
-        foreach ($request->ips() as $ip) {
-            error_log("IP Address #2:".$ip);
+        try {
+            error_log("IP Address #1".$request->ips()[0]);
+            error_log("IP Address #2:".$request->ips()[1]);
+            error_log("IP Address #1 (client):".$request->getClientIps()[0]);
+            error_log("IP Address #2 (client):".$request->getClientIps()[1]);
+        } catch (\Throwable $th) {
+            
         }
         $country = $this->getUserCountry();
         if ($country == 'sa') {
