@@ -27,7 +27,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/en/client-ip', function (Request $request) {
 
     $headers = $request->headers->all();
-    return response()->json(['ip' => $headers["headers"]["x-real-ip"],]);
+    return response()->json(['ip' => $headers["x-real-ip"],]);
 
 });
 Route::get('/en/create-symlink', function (){
