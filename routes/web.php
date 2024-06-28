@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Middleware\SetLocale;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -22,6 +23,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Route::fallback(function () {
 //     return redirect('/');
 // });
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
 Route::group(['prefix' => '{locale}'], function () {
     Route::get('/', [HomeController::class, 'HomePage']);
     Route::get('/data', [HomeController::class, 'data']);
