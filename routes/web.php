@@ -25,6 +25,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // });
 Route::get('/en/linkstorage', function () {
     Artisan::call('storage:link');
+    Artisan::call('config:cache');
+    Artisan::call('view:cache');
+    Artisan::call('route:cache');
+    return "done...";
 });
 Route::group(['prefix' => '{locale}'], function () {
     Route::get('/', [HomeController::class, 'HomePage']);
