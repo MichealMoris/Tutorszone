@@ -38,7 +38,7 @@ class HomeController extends Controller
                 'contacts' => $contacts,
                 'enTeachers' => $enTeachers,
                 'arTeachers' => $arTeachers,
-                'country' => $country,
+                'country' => "sa",
             ];
 
             return view('index', $data);
@@ -50,16 +50,16 @@ class HomeController extends Controller
                 'contacts' => $contacts,
                 'enTeachers' => $enTeachers,
                 'arTeachers' => $arTeachers,
-                'country' => $country,
+                'country' => "ae",
             ];
 
             return view('index', $data);
         }
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $country = $this->getUserCountry();
+        $country = $this->getUserCountry($request);
         if ($country == 'sa') {
             $enTeachers = EnTeacher::whereIn('teacher_country', ['sa', 'both'])->get();
             $arTeachers = ArTeacher::whereIn('teacher_country', ['sa', 'both'])->get();
