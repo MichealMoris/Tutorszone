@@ -12,26 +12,23 @@ use Illuminate\Support\Facades\Log;
 class HomeController extends Controller
 {
 
-    public function getUserCountry()
+    public function getUserCountry(Request $request)
     {
 
         try {
-            $uaeIP = "94.200.100.101";
-            $saIP = "212.26.1.150";
-            $locationInfo = $this->getLocationInfo("197.39.40.182");
-            error_log('Country is: '.$locationInfo);
-            // return strtolower($locationInfo['data']['country']);
-            return "Hello";
+            $headers = $request->headers->all();
+            $ip = $headers["x-real-ip"][0];
+            $data = Http::get("http://ipinfo.io/$ip/json");
+            return strtolower($data["country"]);
         } catch (\Throwable $th) {
             return "ae";
         }
     }
 
 
-    public function HomePage()
+    public function HomePage(Request $request)
     {
-        error_log('Country is: ');
-        $country = $this->getUserCountry();
+        $country = $this->getUserCountry($request);
         if ($country == 'sa') {
             $contacts = Contact::where('country', 'sa')->get();
             $enTeachers = EnTeacher::whereIn('teacher_country', ['sa', 'both'])->get();

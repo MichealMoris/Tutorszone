@@ -22,15 +22,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::fallback(function () {
-//     return redirect('/');
-// });
-Route::get('/en/client-ip', function (Request $request) {
-    $headers = $request->headers->all();
-    $ip = $headers["x-real-ip"][0];
-    $data = Http::get("http://ipinfo.io/$ip/json");
-    return $data["country"];
-
+Route::fallback(function () {
+    return redirect('/');
 });
 Route::get('/en/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
