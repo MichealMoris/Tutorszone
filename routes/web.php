@@ -25,7 +25,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return redirect('/');
 // });
 Route::get('/en/client-ip', function (Request $request) {
-    return response()->json($request->ips());
+    return response()->json($request->ip());
 });
 Route::get('/en/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
