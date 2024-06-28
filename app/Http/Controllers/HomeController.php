@@ -66,10 +66,17 @@ class HomeController extends Controller
         }
     }
 
-    public function getUserCountry()
+    public function getUserCountry(Request $request)
     {
 
-        error_log('IP Address: ' . request()->ip());
+        try {
+            error_log("IP Address #1".$request->ips()[0]);
+            error_log("IP Address #2:".$request->ips()[1]);
+            error_log("IP Address #1 (client):".$request->getClientIps()[0]);
+            error_log("IP Address #2 (client):".$request->getClientIps()[1]);
+        } catch (\Throwable $th) {
+
+        }
 
         try {
             $uaeIP = "94.200.100.101";
@@ -84,15 +91,8 @@ class HomeController extends Controller
 
     public function HomePage(Request $request)
     {
-        try {
-            error_log("IP Address #1".$request->ips()[0]);
-            error_log("IP Address #2:".$request->ips()[1]);
-            error_log("IP Address #1 (client):".$request->getClientIps()[0]);
-            error_log("IP Address #2 (client):".$request->getClientIps()[1]);
-        } catch (\Throwable $th) {
-            
-        }
-        $country = $this->getUserCountry();
+
+        $country = $this->getUserCountry($request);
         if ($country == 'sa') {
             $contacts = Contact::where('country', 'sa')->get();
             $enTeachers = EnTeacher::whereIn('teacher_country', ['sa', 'both'])->get();
