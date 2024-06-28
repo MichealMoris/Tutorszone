@@ -22,9 +22,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::fallback(function () {
-    return redirect('/');
-});
+// Route::fallback(function () {
+//     return redirect('/');
+// });
 Route::get('/en/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";
