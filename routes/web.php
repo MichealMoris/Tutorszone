@@ -25,6 +25,10 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Route::fallback(function () {
 //     return redirect('/');
 // });
+Route::get('/en/clear-cache', function (){
+    Artisan::call("cache:clear");
+    echo "Cache cleared. Thanks";
+});
 Route::get('/en/create-symlink', function (){
     symlink(storage_path('/app/public'), public_path('storage'));
     echo "Symlink Created. Thanks";
